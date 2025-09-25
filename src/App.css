@@ -327,4 +327,7 @@ span.badge.luxury {
   header span.logo {
     margin-bottom: 15px;
   }
+  .vans-container {
+    justify-content: center;
+  }
 }

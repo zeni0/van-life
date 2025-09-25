@@ -15,7 +15,7 @@ export default function Vans() {
     }, [])
     
     return (
-        <main id="vans">
+        <>
             <h1>Explore our van options</h1>
             <div className="vans-container">
                 {vans.map(van => (
@@ -31,6 +31,6 @@ export default function Vans() {
                     </div> 
                 ))}
             </div>
-        </main>
+        </>
     )
 }
