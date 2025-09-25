@@ -13,11 +13,9 @@ export default function Header() {
         <header>
             <span className="logo"><Link to="/">#VANLIFE</Link></span>
             <nav>
-                <ul>
-                    <li><NavLink style={({isActive}) => isActive ? styles : null} to="/host">Host</NavLink></li>
-                    <li><NavLink style={({isActive}) => isActive ? styles : null} to="/about">About</NavLink></li>
-                    <li><NavLink style={({isActive}) => isActive ? styles : null} to="/vans">Vans</NavLink></li>
-                </ul>
+                <NavLink style={({isActive}) => isActive ? styles : null} to="/host">Host</NavLink>
+                <NavLink style={({isActive}) => isActive ? styles : null} to="/about">About</NavLink>
+                <NavLink style={({isActive}) => isActive ? styles : null} to="/vans">Vans</NavLink>
             </nav>
         </header>
     )
