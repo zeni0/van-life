@@ -240,7 +240,7 @@ main#vans {
 .vans-container .van-info > span > strong {
   font-size: 1.2rem;
 }
-span.badge {
+span.badge, button.van-type {
   display: inline-block;
   padding: 5px 20px;
   background-color: #E17654;
@@ -248,16 +248,41 @@ span.badge {
   color: #FFEAD0;
 }
 
-span.badge.simple {
+button.van-type {
+  background-color: #FFEAD0;
+  color: #4D4D4D;
+  font-size: 0.8rem;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border: none;
+}
+
+button:focus {
+  outline: none;
+  border: none; /* Optional: if a border is still appearing, explicitly remove it */
+}
+
+span.badge.simple, button.simple.selected, button.simple:hover {
   background-color: #E17654;
+  color: #FFEAD0;
 }
 
-span.badge.rugged {
+span.badge.rugged, button.rugged.selected, button.rugged:hover {
   background-color: #115E59;
+  color: #FFEAD0;
 }
 
-span.badge.luxury {
+span.badge.luxury, button.luxury.selected, button.luxury:hover {
   background-color: #161616;
+  color: #FFEAD0;
+}
+
+button.clear-filters {
+  background-color: transparent;
+}
+
+button.clear-filters:hover {
+  text-decoration: underline;
 }
 
 .van-detail-container {
