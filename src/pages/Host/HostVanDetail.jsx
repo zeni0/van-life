@@ -1,6 +1,7 @@
 
 import React, { createContext } from "react"
 import { useParams, NavLink, Link, Outlet } from "react-router-dom"
+import { getVan } from "../../api"
 
 export const VanDetailContext = createContext()
 
@@ -8,19 +9,38 @@ export default function HostVanDetail() {
     
     const params = useParams()
     const [van, setVan] = React.useState([])
+    const [loading, setLoading] = React.useState(false)
+    const [error, setError] = React.useState(null)
+
     const styles = {
         fontWeight: "bold",
         textDecoration: "underline",
         color: "#161616"
     }
 
+    // React.useEffect(() => {
+    //     fetch(`/api/host/vans/${params.id}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             return setVan(data.vans[0])
+    //         })
+    // }, [])
+
     React.useEffect(() => {
-        fetch(`/api/host/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data => {
-                return setVan(data.vans[0])
-            })
-    }, [])
+        async function loadVans() {
+            setLoading(true)
+            try {
+                const data = await getVan(params.id)
+                setVan(data)
+            } catch (err) {
+                setError(err)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        loadVans()
+    }, [params.id])
 
     return (
         <div className="host-van-container">

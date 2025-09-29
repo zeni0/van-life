@@ -1,6 +1,7 @@
 
 import React from "react"
 import { useParams, useLocation, Link } from "react-router-dom"
+import { getVan } from "../../api"
 
 
 export default function VanDetail() {
@@ -8,20 +9,37 @@ export default function VanDetail() {
     const params = useParams()
     const location = useLocation()
     const [van, setVan] = React.useState([])
-    console.log(location, "location")
+    //console.log(location, "location")
 
-    console.log(params)
+    //console.log(params)
 
+    // React.useEffect(() => {
+    //     fetch(`/api/vans/${params.id}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data.vans)
+    //             return setVan(data.vans)
+    //         })
+    // }, [])
     React.useEffect(() => {
-        fetch(`/api/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.vans)
-                return setVan(data.vans)
-            })
+        async function loadVan() {
+            //setLoading(true)
+            try {
+                const data = await getVan(params.id)
+                console.log(data, "loadvan")
+                setVan(data)
+            } catch (err) {
+                //setError(err)
+            } finally {
+                //setLoading(false)
+            }
+        }
+
+        loadVan()
     }, [])
 
     const search = location.state?.search || ""
+    const typeFilter = location.state?.type || "all"
 
     return (
         <div className="van-detail-container">
@@ -29,7 +47,7 @@ export default function VanDetail() {
                 to={`..?${search}`}
                 relative="path"
                 className="back-button"
-            >&larr; <span>Back to all vans</span></Link>
+            >&larr; <span>Back to {typeFilter} vans</span></Link>
             {van ? (
                 <div className="van-detail">
                     <img src={van.imageUrl} />
